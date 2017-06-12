@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"log"
+	"io/ioutil"
 )
 
 const (
@@ -28,7 +29,13 @@ func webhookHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		verifyTokenAction(w, r)
 	} else if r.Method == "POST" {
+		bodyBytes, err := ioutil.ReadAll(r.Body)
+		if err != nil {
+			log.Fatal(err)
+		}
 
+		body := string(bodyBytes)
+		log.Println(body)
 	}
 }
 
