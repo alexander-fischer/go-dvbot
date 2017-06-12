@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	port        = "8080"
+	port        = "5000"
 	verifyToken = "dvb_bot_is_boss"
 )
 
