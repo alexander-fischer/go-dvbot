@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"log"
 	"io/ioutil"
+	"os"
 )
 
 const (
@@ -17,8 +18,12 @@ func main() {
 	http.HandleFunc("/", rootHandler)
 	http.HandleFunc("/webhook", webhookHandler)
 
-	log.Println("listen on port " + port)
-	http.ListenAndServe(":"+port, nil)
+	log.Println("listen on port " + os.Getenv("PORT"))
+	err := http.ListenAndServe(":"+os.Getenv("PORT"), nil)
+	if err != nil {
+		log.Fatal(err)
+		panic(err)
+	}
 }
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
