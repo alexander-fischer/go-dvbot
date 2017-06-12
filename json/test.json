@@ -1,0 +1,21 @@
+{
+  "object": "page",
+  "entry": [{
+    "id": "320137445017789",
+    "time": 1495546739028,
+    "messaging": [{
+      "sender": {
+        "id": "1280402938637851"
+      },
+      "recipient": {
+        "id": "320137445017789"
+      },
+      "timestamp": 1495546738650,
+      "message": {
+        "mid": "mid.$cAAF52t5F73ZiZs1_2lcNYg3RxVHi",
+        "seq": 118746,
+        "text": "Albertplatz bis Fernsehturm"
+      }
+    }]
+  }]
+}
