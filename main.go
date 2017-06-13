@@ -61,6 +61,10 @@ func createBotAnswer(jsonBytes []byte) Answer {
 	textInfo := TextInfo{}
 
 	messageStr := GetMessageFromRequest(jsonBytes)
+	if messageStr == "" {
+		return Answer{0, "Das habe ich leider nicht verstanden."}
+	}
+
 	textInfo.text = messageStr
 
 	stopMap, lines, isDelay := ProcessText(messageStr)

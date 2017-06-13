@@ -20,6 +20,10 @@ func ReadFileToBytes(filename string) []byte {
 // Extract message string from message.
 func GetMessageFromRequest(jsonBytes []byte) string {
 	text := gjson.GetBytes(jsonBytes, "entry.#.messaging.#.message.text")
+	if text.String() != "" {
+		return ""
+	}
+
 	messageStr := text.Array()[0].Array()[0].String()
 
 	return messageStr
