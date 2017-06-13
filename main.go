@@ -9,7 +9,6 @@ import (
 )
 
 const (
-	port        = "5000"
 	verifyToken = "dvb_bot_is_boss"
 )
 
@@ -18,8 +17,13 @@ func main() {
 	http.HandleFunc("/", rootHandler)
 	http.HandleFunc("/webhook", webhookHandler)
 
-	log.Println("listen on port " + os.Getenv("PORT"))
-	err := http.ListenAndServe(":"+os.Getenv("PORT"), nil)
+	port := os.Getenv("PORT")
+	if port == "" {
+		log.Fatal("$PORT must be set")
+	}
+
+	log.Println("listen on port " + port)
+	err := http.ListenAndServe(":"+port, nil)
 	if err != nil {
 		log.Fatal(err)
 		panic(err)

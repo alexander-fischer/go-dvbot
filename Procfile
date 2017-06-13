@@ -1,1 +1,1 @@
-“web: go-dvbot”
+web: go-dvbot
