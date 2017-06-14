@@ -52,10 +52,9 @@ func webhookHandler(w http.ResponseWriter, r *http.Request) {
 		log.Println(string(bodyBytes))
 
 		answer := createBotAnswer(bodyBytes)
-		sendMessage(answer)
-
-		log.Println("The answer would be: ")
-		log.Println(answer.text)
+		if answer.senderId != "" {
+			sendMessage(answer)
+		}
 	} else {
 		log.Println("Request was neither GET nor POST.")
 	}
@@ -109,7 +108,6 @@ func sendMessage(answer Answer) {
 	}
 
 	bodyBytes, _ := json.Marshal(reqBody)
-	fmt.Printf("%s", bodyBytes)
 
 	req, err := http.NewRequest("POST", FacebookEndPoint, bytes.NewBuffer(bodyBytes))
 	if err != nil {
