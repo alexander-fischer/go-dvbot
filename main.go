@@ -75,6 +75,10 @@ func createBotAnswer(jsonBytes []byte) Answer {
 	textInfo := TextInfo{}
 
 	messageStr, senderId := GetMessageFromRequest(jsonBytes)
+	if senderId == "" {
+		return Answer{"", 0, "Das habe ich leider nicht verstanden."}
+	}
+
 	if messageStr == "" {
 		return Answer{senderId, 0, "Das habe ich leider nicht verstanden."}
 	}
