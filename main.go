@@ -52,11 +52,12 @@ func webhookHandler(w http.ResponseWriter, r *http.Request) {
 		log.Println(string(bodyBytes))
 
 		answer := createBotAnswer(bodyBytes)
+		sendMessage(answer)
 
 		log.Println("The answer would be: ")
 		log.Println(answer.text)
 	} else {
-
+		log.Println("Request was neither GET nor POST.")
 	}
 }
 
@@ -73,9 +74,9 @@ func verifyTokenAction(w http.ResponseWriter, r *http.Request) {
 func createBotAnswer(jsonBytes []byte) Answer {
 	textInfo := TextInfo{}
 
-	messageStr := GetMessageFromRequest(jsonBytes)
+	messageStr, senderId := GetMessageFromRequest(jsonBytes)
 	if messageStr == "" {
-		return Answer{"", 0, "Das habe ich leider nicht verstanden."}
+		return Answer{senderId, 0, "Das habe ich leider nicht verstanden."}
 	}
 
 	textInfo.text = messageStr
@@ -88,6 +89,7 @@ func createBotAnswer(jsonBytes []byte) Answer {
 	textInfo.category = Categorize(textInfo)
 
 	answer := ProcessAnswer(textInfo)
+	answer.senderId = senderId
 
 	return answer
 }

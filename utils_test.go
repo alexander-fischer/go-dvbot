@@ -20,7 +20,7 @@ func TestGetMessageFromRequest(t *testing.T) {
 	expectedMessage := "Verspätungen der Linie 3 und 10 ab Hauptbahnhof"
 
 	jsonBytes := ReadFileToBytes(filename)
-	resultMessage := GetMessageFromRequest(jsonBytes)
+	resultMessage, _ := GetMessageFromRequest(jsonBytes)
 
 	if resultMessage != expectedMessage {
 		t.Error("String was not cleaned")

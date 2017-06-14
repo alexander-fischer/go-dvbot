@@ -18,15 +18,17 @@ func ReadFileToBytes(filename string) []byte {
 }
 
 // Extract message string from message.
-func GetMessageFromRequest(jsonBytes []byte) string {
+func GetMessageFromRequest(jsonBytes []byte) (string, string) {
 	text := gjson.GetBytes(jsonBytes, "entry.#.messaging.#.message.text")
-	if text.String() != "" {
-		return ""
+	senderId := gjson.GetBytes(jsonBytes, "entry.#.messaging.#.sender.id")
+	if text.String() == "" || senderId.String() == "" {
+		return "", ""
 	}
 
 	messageStr := text.Array()[0].Array()[0].String()
+	messageSId := senderId.Array()[0].Array()[0].String()
 
-	return messageStr
+	return messageStr, messageSId
 }
 
 // Gets a map with all the transit stops and the id.
