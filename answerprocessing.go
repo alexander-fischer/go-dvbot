@@ -36,6 +36,8 @@ func ProcessAnswer(info TextInfo) Answer {
 
 		newText := ""
 		for i, sentence := range sentences {
+			sentence = sentence + "\n"
+
 			if len(newText+sentence) > 640 {
 				answer.text = append(answer.text, newText)
 				newText = sentence
