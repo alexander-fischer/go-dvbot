@@ -74,12 +74,14 @@ func createBotAnswer(jsonBytes []byte) Answer {
 	textInfo := TextInfo{}
 
 	messageStr, senderId := GetMessageFromRequest(jsonBytes)
+
+	errText := []string{"Das habe ich leider nicht verstanden."}
 	if senderId == "" {
-		return Answer{"", 0, "Das habe ich leider nicht verstanden."}
+		return Answer{"", 0, errText}
 	}
 
 	if messageStr == "" {
-		return Answer{senderId, 0, "Das habe ich leider nicht verstanden."}
+		return Answer{senderId, 0, errText}
 	}
 
 	textInfo.text = messageStr
@@ -98,47 +100,49 @@ func createBotAnswer(jsonBytes []byte) Answer {
 }
 
 func sendMessage(answer Answer) {
-	reqBody := Body{
-		Recipient: Recipient{
-			Id: answer.senderId,
-		},
-		Message: Message{
-			Text: answer.text,
-		},
+	for _, answerText := range answer.text {
+		reqBody := Body{
+			Recipient: Recipient{
+				Id: answer.senderId,
+			},
+			Message: Message{
+				Text: answerText,
+			},
+		}
+
+		bodyBytes, _ := json.Marshal(reqBody)
+
+		req, err := http.NewRequest("POST", FacebookEndPoint, bytes.NewBuffer(bodyBytes))
+		if err != nil {
+			log.Print(err)
+		}
+
+		values := url.Values{}
+		values.Add("access_token", accessToken)
+
+		req.URL.RawQuery = values.Encode()
+		req.Header.Add("Content-Type", "application/json; charset=UTF-8")
+
+		client := &http.Client{Timeout: time.Duration(30 * time.Second)}
+		res, err := client.Do(req)
+		if err != nil {
+			log.Println(err)
+		}
+
+		var result map[string]interface{}
+		resBody, err := ioutil.ReadAll(res.Body)
+		if err != nil {
+			log.Println(err)
+		}
+
+		if err := json.Unmarshal(resBody, &result); err != nil {
+			log.Println(err)
+		}
+
+		log.Println(result)
+
+		res.Body.Close()
 	}
-
-	bodyBytes, _ := json.Marshal(reqBody)
-
-	req, err := http.NewRequest("POST", FacebookEndPoint, bytes.NewBuffer(bodyBytes))
-	if err != nil {
-		log.Print(err)
-	}
-
-	values := url.Values{}
-	values.Add("access_token", accessToken)
-
-	req.URL.RawQuery = values.Encode()
-	req.Header.Add("Content-Type", "application/json; charset=UTF-8")
-
-	client := &http.Client{Timeout: time.Duration(30 * time.Second)}
-	res, err := client.Do(req)
-	if err != nil {
-		log.Println(err)
-	}
-
-	defer res.Body.Close()
-
-	var result map[string]interface{}
-	resBody, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		log.Println(err)
-	}
-
-	if err := json.Unmarshal(resBody, &result); err != nil {
-		log.Println(err)
-	}
-
-	log.Println(result)
 }
 
 type Body struct {

@@ -8,6 +8,7 @@ import (
 	"github.com/tidwall/gjson"
 	"time"
 	"fmt"
+	"strings"
 )
 
 // Process answer.
@@ -30,7 +31,25 @@ func ProcessAnswer(info TextInfo) Answer {
 		break
 	}
 
-	answer.text = answerText
+	if len(answerText) > 640 {
+		sentences := strings.Split(answerText, "\n")
+
+		newText := ""
+		for i, sentence := range sentences {
+			if len(newText+sentence) > 640 {
+				answer.text = append(answer.text, newText)
+				newText = sentence
+			} else {
+				newText = newText + sentence
+
+				if i == len(sentences)-1 {
+					answer.text = append(answer.text, newText)
+				}
+			}
+		}
+	} else {
+		answer.text = append(answer.text, answerText)
+	}
 	answer.category = info.category
 	return answer
 }
@@ -50,12 +69,12 @@ func processDepartures(info TextInfo) string {
 			for _, line := range info.lines {
 				if line == dep.Line {
 					answerText = answerText + "Die Linie " + dep.Line + " Richtung " +
-						dep.Direction + " in " + minutes + " Minuten." + "\n"
+						dep.Direction + " in " + minutes + " Minuten.\n"
 				}
 			}
 		} else {
 			answerText = answerText + "Die Linie " + dep.Line + " Richtung " + dep.Direction + " in " +
-				minutes + " Minuten." + "\n"
+				minutes + " Minuten.\n"
 		}
 	}
 	return answerText
@@ -63,6 +82,7 @@ func processDepartures(info TextInfo) string {
 
 // Get departures with help of stop name.
 func getDepartures(stopName string) []*dvb.Departure {
+	// Ugly Albertplatz workaround
 	if stopName == "albertplatz" {
 		stopName = "ALP"
 	}
