@@ -99,7 +99,9 @@ func sendMessage(answer Answer) {
 		Recipient: Recipient{
 			Id: answer.senderId,
 		},
-		Message: answer.text,
+		Message: Message{
+			Text: answer.text,
+		},
 	}
 
 	bodyBytes, _ := json.Marshal(reqBody)
@@ -139,9 +141,13 @@ func sendMessage(answer Answer) {
 
 type Body struct {
 	Recipient Recipient `json:"recipient"`
-	Message   string `json:"message"`
+	Message   Message `json:"message"`
 }
 
 type Recipient struct {
 	Id string `json:"id"`
+}
+
+type Message struct {
+	Text string `json:"text"`
 }
