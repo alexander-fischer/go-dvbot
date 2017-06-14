@@ -6,10 +6,16 @@ import (
 	"log"
 	"io/ioutil"
 	"os"
+	"encoding/json"
+	"bytes"
+	"net/url"
+	"time"
 )
 
 const (
-	verifyToken = "dvb_bot_is_boss"
+	accessToken      = "EAAFSK0G54cwBAGTI4fyZBJH3TayNjnBQg6BIfdZBsGtEZAZAqle57vtzzQUzVEmrZAeCqzjje5F6m2SEOVtz9IpSlCqCFGOMrhMLzHOK43m1XSdZCZBs5tqZBz6vfZAVhrqKQokxgRZCNOZCxpQ4RPbCO0faT95ADf7U5RZCZC88tgc5xrwZDZD"
+	verifyToken      = "dvb_bot_is_boss"
+	FacebookEndPoint = "https://graph.facebook.com/v2.6/me/messages"
 )
 
 // Main entry point.
@@ -43,16 +49,23 @@ func webhookHandler(w http.ResponseWriter, r *http.Request) {
 			log.Fatal(err)
 		}
 
-		createBotAnswer(bodyBytes)
+		log.Println(string(bodyBytes))
+
+		answer := createBotAnswer(bodyBytes)
+
+		log.Println("The answer would be: ")
+		log.Println(answer.text)
+	} else {
+
 	}
 }
 
 func verifyTokenAction(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Query().Get("hub.verify_token") == verifyToken {
-		log.Print("verify token success.")
+		log.Println("verify token success.")
 		fmt.Fprintf(w, r.URL.Query().Get("hub.challenge"))
 	} else {
-		log.Print("Error: verify token failed.")
+		log.Println("Error: verify token failed.")
 		fmt.Fprint(w, "Error, wrong validation token")
 	}
 }
@@ -62,7 +75,7 @@ func createBotAnswer(jsonBytes []byte) Answer {
 
 	messageStr := GetMessageFromRequest(jsonBytes)
 	if messageStr == "" {
-		return Answer{0, "Das habe ich leider nicht verstanden."}
+		return Answer{"", 0, "Das habe ich leider nicht verstanden."}
 	}
 
 	textInfo.text = messageStr
@@ -76,8 +89,57 @@ func createBotAnswer(jsonBytes []byte) Answer {
 
 	answer := ProcessAnswer(textInfo)
 
-	log.Print("The answer would be: ")
-	log.Print(answer.text)
-
 	return answer
+}
+
+func sendMessage(answer Answer) {
+	reqBody := Body{
+		Recipient: Recipient{
+			Id: answer.senderId,
+		},
+		Message: answer.text,
+	}
+
+	bodyBytes, _ := json.Marshal(reqBody)
+	fmt.Printf("%s", bodyBytes)
+
+	req, err := http.NewRequest("POST", FacebookEndPoint, bytes.NewBuffer(bodyBytes))
+	if err != nil {
+		log.Print(err)
+	}
+
+	values := url.Values{}
+	values.Add("access_token", accessToken)
+
+	req.URL.RawQuery = values.Encode()
+	req.Header.Add("Content-Type", "application/json; charset=UTF-8")
+
+	client := &http.Client{Timeout: time.Duration(30 * time.Second)}
+	res, err := client.Do(req)
+	if err != nil {
+		log.Println(err)
+	}
+
+	defer res.Body.Close()
+
+	var result map[string]interface{}
+	resBody, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		log.Println(err)
+	}
+
+	if err := json.Unmarshal(resBody, &result); err != nil {
+		log.Println(err)
+	}
+
+	log.Println(result)
+}
+
+type Body struct {
+	Recipient Recipient `json:"recipient"`
+	Message   string `json:"message"`
+}
+
+type Recipient struct {
+	Id string `json:"id"`
 }

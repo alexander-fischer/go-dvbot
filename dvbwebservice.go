@@ -13,15 +13,15 @@ import (
 )
 
 const (
-	url      string = "http://trias.vvo-online.de:9000/Middleware/Data/Trias"
-	routeXml string = "xml/route.xml"
+	vvoEndpoint string = "http://trias.vvo-online.de:9000/Middleware/Data/Trias"
+	routeXml    string = "xml/route.xml"
 )
 
 // Calls the TRIAS DVB backend.
 func callDvbApi(body string) string {
 	bodyBytes := strings.NewReader(body)
 
-	req, err := http.NewRequest("POST", url, bodyBytes)
+	req, err := http.NewRequest("POST", vvoEndpoint, bodyBytes)
 	if err != nil {
 		fmt.Printf("http.NewRequest() error: %v\n", err)
 		return ""
