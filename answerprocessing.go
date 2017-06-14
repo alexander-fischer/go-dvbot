@@ -63,6 +63,10 @@ func processDepartures(info TextInfo) string {
 
 // Get departures with help of stop name.
 func getDepartures(stopName string) []*dvb.Departure {
+	if stopName == "albertplatz" {
+		stopName = "ALP"
+	}
+
 	deps, _ := dvb.Monitor(stopName, 0, "")
 	return deps
 }
