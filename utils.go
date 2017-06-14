@@ -21,11 +21,10 @@ func ReadFileToBytes(filename string) []byte {
 func GetMessageFromRequest(jsonBytes []byte) (string, string) {
 	text := gjson.GetBytes(jsonBytes, "entry.#.messaging.#.message.text")
 	senderId := gjson.GetBytes(jsonBytes, "entry.#.messaging.#.sender.id")
-	if text.String() == "" || senderId.String() == "" {
+
+	if text.String() == "" || text.String() == "[[]]" || senderId.String() == "" || senderId.String() == "[[]]" {
 		return "", ""
 	}
-
-	log.Println(text.String())
 
 	messageStr := text.Array()[0].Array()[0].String()
 	messageSId := senderId.Array()[0].Array()[0].String()
