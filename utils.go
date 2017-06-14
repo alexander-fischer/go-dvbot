@@ -25,7 +25,7 @@ func GetMessageFromRequest(jsonBytes []byte) (string, string) {
 		return "", ""
 	}
 
-	log.Println(text)
+	log.Println(text.String())
 
 	messageStr := text.Array()[0].Array()[0].String()
 	messageSId := senderId.Array()[0].Array()[0].String()
