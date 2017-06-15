@@ -47,8 +47,10 @@ func ProcessText(text string) ([]string, []string, []string, bool) {
 
 		stopName, stopNr := FindStops(words, isLast)
 		if stopName != "" && stopNr != "" {
-			stopNames = append(stopNames, stopName)
-			stopIds = append(stopIds, stopNr)
+			if !Contains(stopIds, stopNr) {
+				stopNames = append(stopNames, stopName)
+				stopIds = append(stopIds, stopNr)
+			}
 		}
 	}
 

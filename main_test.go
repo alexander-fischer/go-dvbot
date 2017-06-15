@@ -8,10 +8,10 @@ import (
 
 func TestCreateBotAnswer(t *testing.T)  {
 	testId := "111"
-	testMessage := "Postplatz zu Fernsehturm"
+	testMessage := "Cottaer Straße"
 	testAnswer, textInfo := createBotAnswer(testMessage, testId)
 
-	if testAnswer.category != DEPARTURES {
+	if testAnswer.category != 0 {
 		t.Error("TestCreateBotAnswer", "has false category")
 		t.Error("Answer:", testAnswer)
 		t.Error("TextInfo", textInfo)
