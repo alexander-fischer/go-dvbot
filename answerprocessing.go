@@ -58,10 +58,7 @@ func ProcessAnswer(info TextInfo) Answer {
 
 // Process text for departures.
 func processDepartures(info TextInfo) string {
-	stopName := ""
-	for _, v := range info.stops {
-		stopName = v
-	}
+	stopName := info.stopNames[0]
 
 	answerText := ""
 	deps := getDepartures(stopName)
@@ -160,12 +157,7 @@ func processConnections(info TextInfo) string {
 	answerText := ""
 	nrOfResults := 1
 
-	stopArr := []string{}
-	for k := range info.stops {
-		stopArr = append(stopArr, k)
-	}
-
-	cons := GetConnectionsFromDvb(stopArr[0], stopArr[1], nrOfResults)
+	cons := GetConnectionsFromDvb(info.stopIds[0], info.stopIds[1], nrOfResults)
 
 	if len(cons) == 0 {
 		return "Zwischen diesen Haltestellen ist keine Verbindung möglich."

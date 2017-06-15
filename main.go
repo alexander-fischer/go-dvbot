@@ -53,7 +53,7 @@ func webhookHandler(w http.ResponseWriter, r *http.Request) {
 
 		messageStr, senderId := GetMessageFromRequest(bodyBytes)
 
-		answer := createBotAnswer(messageStr, senderId)
+		answer, _ := createBotAnswer(messageStr, senderId)
 		if answer.senderId != "" {
 			sendMessage(answer)
 		}
@@ -72,22 +72,23 @@ func verifyTokenAction(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func createBotAnswer(message string, senderId string) Answer {
+func createBotAnswer(message string, senderId string) (Answer, TextInfo) {
 	textInfo := TextInfo{}
 
 	errText := []string{"Das habe ich leider nicht verstanden."}
 	if senderId == "" {
-		return Answer{"", 0, errText}
+		return Answer{"", 0, errText}, textInfo
 	}
 
 	if message == "" {
-		return Answer{senderId, 0, errText}
+		return Answer{senderId, 0, errText}, textInfo
 	}
 
 	textInfo.text = message
 
-	stopMap, lines, isDelay := ProcessText(message)
-	textInfo.stops = stopMap
+	stopNames, stopIds, lines, isDelay := ProcessText(message)
+	textInfo.stopNames = stopNames
+	textInfo.stopIds = stopIds
 	textInfo.lines = lines
 	textInfo.delay = isDelay
 
@@ -96,7 +97,7 @@ func createBotAnswer(message string, senderId string) Answer {
 	answer := ProcessAnswer(textInfo)
 	answer.senderId = senderId
 
-	return answer
+	return answer, textInfo
 }
 
 func sendMessage(answer Answer) {

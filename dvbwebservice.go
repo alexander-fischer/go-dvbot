@@ -3,7 +3,6 @@ package main
 import (
 	"net/http"
 	"strings"
-	"fmt"
 	"strconv"
 	"time"
 	xj "github.com/basgys/goxml2json"
@@ -23,7 +22,7 @@ func callDvbApi(body string) string {
 
 	req, err := http.NewRequest("POST", vvoEndpoint, bodyBytes)
 	if err != nil {
-		fmt.Printf("http.NewRequest() error: %v\n", err)
+		log.Printf("http.NewRequest() error: %v\n", err)
 		return ""
 	}
 
@@ -85,7 +84,7 @@ func processRouteResults(json string) []Connection {
 	results := gjson.Get(json, "Trias.ServiceDelivery.DeliveryPayload.TripResponse.TripResult")
 
 	if !results.Exists() {
-		fmt.Println("Could not find trip Results")
+		log.Println("Could not find trip Results")
 		return connections
 	}
 

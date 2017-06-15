@@ -8,8 +8,9 @@ import (
 
 var allNames, allStops = GetAllTransitStops("json/transit_stops.json")
 
-func ProcessText(text string) (map[string]string, []string, bool) {
-	stopMap := make(map[string]string)
+func ProcessText(text string) ([]string, []string, []string, bool) {
+	stopNames := []string{}
+	stopIds := []string{}
 	linesArray := []string{}
 	isAboutDelay := false
 
@@ -46,11 +47,12 @@ func ProcessText(text string) (map[string]string, []string, bool) {
 
 		stopName, stopNr := FindStops(words, isLast)
 		if stopName != "" && stopNr != "" {
-			stopMap[stopNr] = stopName
+			stopNames = append(stopNames, stopName)
+			stopIds = append(stopIds, stopNr)
 		}
 	}
 
-	return stopMap, linesArray, isAboutDelay
+	return stopNames, stopIds, linesArray, isAboutDelay
 }
 
 // Clean the word from useless chars.
@@ -160,7 +162,7 @@ func Categorize(info TextInfo) int {
 		return DELAYS
 	}
 
-	switch len(info.stops) {
+	switch len(info.stopIds) {
 	case 0:
 		break
 	case 1:
