@@ -113,7 +113,7 @@
     {
       "nr": "de:14612:12",
       "name_location": "dresden bautzner rothenburger straße",
-      "name": "bautzner rothenburger straße",
+      "name": "bautzner/rothenburger straße",
       "location": "dresden",
       "tarifzone1": 100,
       "tarifzone2": "",
@@ -245,7 +245,7 @@
     {
       "nr": "de:14612:25",
       "name_location": "dresden haltepunkt freiberger straße",
-      "name": "hp. freiberger straße",
+      "name": "hp freiberger straße",
       "location": "dresden",
       "tarifzone1": 100,
       "tarifzone2": "",
@@ -1532,7 +1532,7 @@
     {
       "nr": "de:14612:166",
       "name_location": "dresden haltepunkt plauen",
-      "name": "hp. plauen",
+      "name": "hp plauen",
       "location": "dresden",
       "tarifzone1": 103,
       "tarifzone2": 104,
@@ -1774,7 +1774,7 @@
     {
       "nr": "de:14612:193",
       "name_location": "dresden haltepunkt cotta",
-      "name": "hp. cotta",
+      "name": "hp cotta",
       "location": "dresden",
       "tarifzone1": 105,
       "tarifzone2": "",
@@ -3897,7 +3897,7 @@
     {
       "nr": "de:14612:550",
       "name_location": "dresden haltepunkt kemnitz",
-      "name": "hp. kemnitz",
+      "name": "hp kemnitz",
       "location": "dresden",
       "tarifzone1": 105,
       "tarifzone2": "",
@@ -3963,7 +3963,7 @@
     {
       "nr": "de:14612:556",
       "name_location": "dresden haltepunkt stetzsch",
-      "name": "hp. stetzsch",
+      "name": "hp stetzsch",
       "location": "dresden",
       "tarifzone1": 105,
       "tarifzone2": "",
@@ -4260,7 +4260,7 @@
     {
       "nr": "de:14612:593",
       "name_location": "dresden haltepunkt pieschen",
-      "name": "hp. pieschen",
+      "name": "hp pieschen",
       "location": "dresden",
       "tarifzone1": 106,
       "tarifzone2": "",
@@ -4524,7 +4524,7 @@
     {
       "nr": "de:14612:622",
       "name_location": "dresden haltepunkt trachau",
-      "name": "hp. trachau",
+      "name": "hp trachau",
       "location": "dresden",
       "tarifzone1": 106,
       "tarifzone2": "",
@@ -5712,7 +5712,7 @@
     {
       "nr": "de:14612:757",
       "name_location": "dresden haltepunkt strehlen",
-      "name": "hp. strehlen",
+      "name": "hp strehlen",
       "location": "dresden",
       "tarifzone1": 100,
       "tarifzone2": "",
@@ -7098,7 +7098,7 @@
     {
       "nr": "de:14612:910",
       "name_location": "dresden haltepunkt zschachwitz",
-      "name": "hp. zschachwitz",
+      "name": "hp zschachwitz",
       "location": "dresden",
       "tarifzone1": 101,
       "tarifzone2": "",
@@ -7197,7 +7197,7 @@
     {
       "nr": "de:14612:919",
       "name_location": "dresden haltepunkt dobritz",
-      "name": "hp. dobritz",
+      "name": "hp dobritz",
       "location": "dresden",
       "tarifzone1": 100,
       "tarifzone2": "",
@@ -9430,7 +9430,7 @@
     {
       "nr": "de:14628:1175",
       "name_location": "freital haltepunkt coßmannsdorf",
-      "name": "hp. coßmannsdorf",
+      "name": "hp coßmannsdorf",
       "location": "freital",
       "tarifzone1": 610,
       "tarifzone2": "",
@@ -13192,7 +13192,7 @@
     {
       "nr": "de:14628:1953",
       "name_location": "niederschlottwitz haltepunkt",
-      "name": "hp. niederschlottwitz",
+      "name": "hp niederschlottwitz",
       "location": "schlottwitz",
       "tarifzone1": 638,
       "tarifzone2": 719,
@@ -16173,7 +16173,7 @@
     {
       "nr": "de:14628:3430",
       "name_location": "pirna haltepunkt copitz",
-      "name": "hp. copitz",
+      "name": "hp copitz",
       "location": "pirna",
       "tarifzone1": 700,
       "tarifzone2": "",
@@ -16536,7 +16536,7 @@
     {
       "nr": "de:14628:3465",
       "name_location": "pirna haltepunkt copitz nord",
-      "name": "hp. copitz nord",
+      "name": "hp copitz nord",
       "location": "pirna",
       "tarifzone1": 700,
       "tarifzone2": "",
@@ -17889,7 +17889,7 @@
     {
       "nr": "de:14628:3645",
       "name_location": "schmilka haltepunkt hirschmühle",
-      "name": "hp. hirschmühle",
+      "name": "hp hirschmühle",
       "location": "schmilka",
       "tarifzone1": 720,
       "tarifzone2": "",
@@ -19561,7 +19561,7 @@
     {
       "nr": "de:14628:3828",
       "name_location": "langenwolmsdorf haltepunkt mitte",
-      "name": "hp. mitte",
+      "name": "hp mitte",
       "location": "langenwolmsdorf",
       "tarifzone1": 730,
       "tarifzone2": "",
@@ -20617,7 +20617,7 @@
     {
       "nr": "de:14628:3940",
       "name_location": "hainersdorf haltepunkt amtshainersdorf",
-      "name": "hp. amtshainersdorf",
+      "name": "hp amtshainersdorf",
       "location": "hainersdorf (sachs)",
       "tarifzone1": 730,
       "tarifzone2": 720,
@@ -23895,7 +23895,7 @@
     {
       "nr": "de:14627:4279",
       "name_location": "radebeul haltepunkt lößnitzgrund",
-      "name": "hp. lößnitzgrund",
+      "name": "hp lößnitzgrund",
       "location": "radebeul",
       "tarifzone1": 520,
       "tarifzone2": "",

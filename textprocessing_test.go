@@ -6,7 +6,7 @@ import (
 )
 
 // Run with `go test textprocessing_test.go textprocessing.go utils.go textinfo.go -bench=.`
-var testStr = "Abfahrten. der, Linie? 3! ab/ Hauptbahnhof;"
+var testStr = "Abfahrten. der, Linie? 3! ab Hauptbahnhof;"
 var expectedStr = "Abfahrten der Linie 3 ab Hauptbahnhof"
 
 func TestCleanString(t *testing.T) {

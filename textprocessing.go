@@ -65,7 +65,6 @@ func CleanString(text string) string {
 	text = strings.Replace(text, ":", "", -1)
 	text = strings.Replace(text, "?", "", -1)
 	text = strings.Replace(text, "!", "", -1)
-	text = strings.Replace(text, "/", "", -1)
 
 	return text
 }

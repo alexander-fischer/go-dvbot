@@ -8,7 +8,7 @@ import (
 
 func TestCreateBotAnswer(t *testing.T)  {
 	testId := "111"
-	testMessage := "Caspar-David-Friedrich Straße"
+	testMessage := "Bautzner/Rothenburger Straße"
 	testAnswer, textInfo := createBotAnswer(testMessage, testId)
 
 	if testAnswer.category != 0 {
