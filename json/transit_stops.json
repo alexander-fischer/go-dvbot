@@ -45,6 +45,17 @@
       "geo_y": "51,049475"
     },
     {
+      "nr": "de:14612:5",
+      "name_location": "dresden pirnaischer platz",
+      "name": "pirnaischen platz",
+      "location": "dresden",
+      "tarifzone1": 100,
+      "tarifzone2": "",
+      "tarifzone3": "",
+      "geo_x": "13,743974",
+      "geo_y": "51,049475"
+    },
+    {
       "nr": "de:14612:6",
       "name_location": "dresden deutsches hygiene museum",
       "name": "deutsches hygiene museum",
@@ -26282,7 +26293,7 @@
     {
       "nr": "de:14628:4701",
       "name_location": "wilsdruff freiberger straße",
-      "name": "freiberger straße",
+      "name": "wilsdruff freiberger straße",
       "location": "wilsdruff (kr pir)",
       "tarifzone1": 511,
       "tarifzone2": 519,
