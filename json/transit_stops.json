@@ -44,17 +44,7 @@
       "geo_x": "13,743974",
       "geo_y": "51,049475"
     },
-    {
-      "nr": "de:14612:5",
-      "name_location": "dresden pirnaischer platz",
-      "name": "pirnaischen platz",
-      "location": "dresden",
-      "tarifzone1": 100,
-      "tarifzone2": "",
-      "tarifzone3": "",
-      "geo_x": "13,743974",
-      "geo_y": "51,049475"
-    },
+
     {
       "nr": "de:14612:6",
       "name_location": "dresden deutsches hygiene museum",
@@ -47127,7 +47117,7 @@
     {
       "nr": "de:14625:8005",
       "name_location": "hoyerswerda adler",
-      "name": "adler",
+      "name": "hoyerswerda adler",
       "location": "hoyerswerda",
       "tarifzone1": 203,
       "tarifzone2": "",
