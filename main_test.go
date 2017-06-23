@@ -8,7 +8,7 @@ import (
 
 func TestCreateBotAnswer(t *testing.T)  {
 	testId := "111"
-	testMessage := "Hp freiberger straße zum pirnaischen platz"
+	testMessage := "Pirnaischen platz nach der altnossener strasse"
 	testAnswer, textInfo := createBotAnswer(testMessage, testId)
 
 	if testAnswer.category != 0 {

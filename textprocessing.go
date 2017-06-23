@@ -2,8 +2,7 @@ package main
 
 import (
 	"strings"
-	"github.com/renstrom/fuzzysearch/fuzzy"
-	"sort"
+	"github.com/antzucaro/matchr"
 )
 
 var allNames, allStops = GetAllTransitStops("json/transit_stops.json")
@@ -77,54 +76,54 @@ func FindStops(words []string, isLast bool) (string, string) {
 	case 3:
 		// Search for all 3 words.
 		searchedString := words[0] + " " + words[1] + " " + words[2]
-		stopName, stopNr = fuzzySearch(searchedString)
+		stopName, stopNr = search(searchedString)
 		if stopName != "" {
 			return stopName, stopNr
 		}
 
 		// Search for first 2 words.
 		searchedString = words[0] + " " + words[1]
-		stopName, stopNr = fuzzySearch(searchedString)
+		stopName, stopNr = search(searchedString)
 		if stopName != "" {
 			return stopName, stopNr
 		}
 
 		// Search for last 2 words.
 		searchedString = words[1] + " " + words[2]
-		stopName, stopNr = fuzzySearch(searchedString)
+		stopName, stopNr = search(searchedString)
 		if stopName != "" {
 			return stopName, stopNr
 		}
 
 		// Search original word.
 		searchedString = words[1]
-		stopName, stopNr = fuzzySearch(searchedString)
+		stopName, stopNr = search(searchedString)
 		if stopName != "" {
 			return stopName, stopNr
 		}
 	case 2:
 		// Searches all 2 words.
-		searchedString := words[0] + words[1]
-		stopName, stopNr = fuzzySearch(searchedString)
+		searchedString := words[0] + " " + words[1]
+		stopName, stopNr = search(searchedString)
 		if stopName != "" {
 			return stopName, stopNr
 		}
 
 		if !isLast {
 			// Searches for the first word.
-			stopName, stopNr = fuzzySearch(words[0])
+			stopName, stopNr = search(words[0])
 			if stopName != "" {
 				return stopName, stopNr
 			}
 		} else {
 			// Searches for the last word.
-			stopName, stopNr = fuzzySearch(words[1])
+			stopName, stopNr = search(words[1])
 			if stopName != "" {
 				return stopName, stopNr
 			}
 		}
 	case 1:
-		stopName, stopNr = fuzzySearch(words[0])
+		stopName, stopNr = search(words[0])
 		if stopName != "" {
 			return stopName, stopNr
 		}
@@ -136,23 +135,34 @@ func FindStops(words []string, isLast bool) (string, string) {
 	return stopName, stopNr
 }
 
-// Fuzzy searches the stop of the list.
-func fuzzySearch(wordGroup string) (string, string) {
-	stopName := ""
-	stopNr := ""
+// Searches the stop of the list with help of Damerau-Levenshtein algorithm.
+func search(wordGroup string) (string, string) {
+	threshold := 0.93
 
-	matches := fuzzy.RankFind(wordGroup, allNames)
-	sort.Sort(matches)
+	matchedNames := []Rank{}
 
-	if len(matches) != 0 {
-		dist := matches[0].Distance
-		if dist <= 1 {
-			matchedName := matches[0].Target
-			stopName = matchedName
-			stopNr = allStops[matchedName]
+	for _, name := range allNames {
+		dist := matchr.DamerauLevenshtein(wordGroup, name)
+		if dist <= 5 {
+			d := float64(dist)
+			l := float64(len(wordGroup + name))
+			ratio := 1 - float64(d/l)
+			if ratio >= threshold {
+				rank := Rank{ratio, name}
+				matchedNames = append(matchedNames, rank)
+			}
 		}
 	}
-	return stopName, stopNr
+
+	if len(matchedNames) > 0 {
+		bestRank := findBestRank(matchedNames)
+		stopName := bestRank.Name
+		stopNr := allStops[stopName]
+
+		return stopName, stopNr
+	} else {
+		return "", ""
+	}
 }
 
 // Categorize the text for answer creation.
@@ -196,4 +206,24 @@ func isDelayWord(word string) bool {
 		}
 	}
 	return false
+}
+
+type Rank struct {
+	RelDist float64
+	Name    string
+}
+
+// Find best rank.
+func findBestRank(ranks []Rank) Rank {
+	bestDist := 0.0
+	bestRank := Rank{}
+
+	for _, rank := range ranks {
+		rankDist := rank.RelDist
+		if rankDist > bestDist {
+			bestRank = rank
+		}
+	}
+
+	return bestRank
 }

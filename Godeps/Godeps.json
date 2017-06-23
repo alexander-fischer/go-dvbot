@@ -4,6 +4,10 @@
 	"GodepVersion": "v79",
 	"Deps": [
 		{
+			"ImportPath": "github.com/antzucaro/matchr",
+			"Rev": "63146c76a4e12211c0d269f5fb74dab2c24e3067"
+		},
+		{
 			"ImportPath": "github.com/basgys/goxml2json",
 			"Comment": "v1.0.0-10-g35ec5cd",
 			"Rev": "35ec5cd0c4d994b5e3d64b60365c644e9f137f9e"
@@ -11,11 +15,6 @@
 		{
 			"ImportPath": "github.com/kiliankoe/dvbgo",
 			"Rev": "f4fbf87615d31b83f53a4776401025fd8b6be69d"
-		},
-		{
-			"ImportPath": "github.com/renstrom/fuzzysearch/fuzzy",
-			"Comment": "v1.0.0-2-g2d205ac",
-			"Rev": "2d205ac6ec17a839a94bdbfd16d2fa6c6dada2e0"
 		},
 		{
 			"ImportPath": "github.com/tidwall/gjson",

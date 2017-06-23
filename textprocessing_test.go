@@ -72,19 +72,19 @@ func BenchmarkFindStops(b *testing.B) {
 	}
 }
 
-func TestFuzzySearch(t *testing.T) {
+func TestSearch(t *testing.T) {
 	wordGroup := "hauptbahnho"
-	stopName, stopNr := fuzzySearch(wordGroup)
+	stopName, stopNr := search(wordGroup)
 
 	if stopName != "hauptbahnhof" || stopNr != "de:14612:28" {
 		t.Error("Can't find stop")
 	}
 }
 
-func BenchmarkFuzzySearch(b *testing.B) {
+func BenchmarkSearch(b *testing.B) {
 	wordGroup := "hauptbahnho"
 	for i := 0; i < b.N; i++ {
-		fuzzySearch(wordGroup)
+		search(wordGroup)
 	}
 }
 
