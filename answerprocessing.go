@@ -86,6 +86,11 @@ func getDepartures(stopName string) []*dvb.Departure {
 		stopName = "ALP"
 	}
 
+	// Because of renaming of stop
+	if stopName == "großer garten" {
+		stopName = "georg-arnhold-bad"
+	}
+
 	deps, _ := dvb.Monitor(stopName, 0, "")
 	return deps
 }

@@ -213,7 +213,7 @@ type Rank struct {
 	Name    string
 }
 
-// Find best rank.
+// Finds best rank.
 func findBestRank(ranks []Rank) Rank {
 	bestDist := 0.0
 	bestRank := Rank{}

@@ -79,6 +79,17 @@
       "geo_y": "51,042569"
     },
     {
+      "nr": "de:14612:8",
+      "name_location": "dresden großer garten",
+      "name": "georg-arnhold-bad",
+      "location": "dresden",
+      "tarifzone1": 100,
+      "tarifzone2": "",
+      "tarifzone3": "",
+      "geo_x": "13,751329",
+      "geo_y": "51,042569"
+    },
+    {
       "nr": "de:14612:9",
       "name_location": "dresden dürerstraße",
       "name": "dürerstraße",
@@ -8089,7 +8100,7 @@
     {
       "nr": "de:14628:1016",
       "name_location": "lungkwitz bad",
-      "name": "bad",
+      "name": "lungkwitz bad",
       "location": "lungkwitz",
       "tarifzone1": 614,
       "tarifzone2": "",
@@ -11543,7 +11554,7 @@
     {
       "nr": "de:14628:1601",
       "name_location": "malter bad",
-      "name": "bad",
+      "name": "malter bad",
       "location": "malter",
       "tarifzone1": 600,
       "tarifzone2": "",
@@ -24226,7 +24237,7 @@
     {
       "nr": "de:14627:4327",
       "name_location": "friedewald bad",
-      "name": "bad",
+      "name": "friedewald bad",
       "location": "friedewald (kr mei)",
       "tarifzone1": 520,
       "tarifzone2": "",
@@ -26261,7 +26272,7 @@
     {
       "nr": "de:14627:4693",
       "name_location": "miltitz bad",
-      "name": "bad",
+      "name": "miltitz bad",
       "location": "miltitz (b meißen)",
       "tarifzone1": 515,
       "tarifzone2": 503,
@@ -39494,7 +39505,7 @@
     {
       "nr": "de:14625:6934",
       "name_location": "wittichenau bad",
-      "name": "bad",
+      "name": "wittichenau bad",
       "location": "wittichenau",
       "tarifzone1": 320,
       "tarifzone2": "",
@@ -41628,7 +41639,7 @@
     {
       "nr": "de:14625:7252",
       "name_location": "steinigtwolmsdorf bad",
-      "name": "bad",
+      "name": "steinigtwolmsdorf bad",
       "location": "steinigtwolmsdorf",
       "tarifzone1": "",
       "tarifzone2": "",
