@@ -13589,7 +13589,7 @@
     {
       "nr": "de:14628:3016",
       "name_location": "bonnewitz radeberger straße",
-      "name": "radeberger straße",
+      "name": "bonnewitz radeberger straße",
       "location": "bonnewitz",
       "tarifzone1": 700,
       "tarifzone2": "",
@@ -30804,7 +30804,7 @@
     {
       "nr": "de:14627:5461",
       "name_location": "zschorna radeburger straße",
-      "name": "radeburger straße",
+      "name": "zschorna radeburger straße",
       "location": "zschorna b großenh.",
       "tarifzone1": 420,
       "tarifzone2": "",
@@ -30969,7 +30969,7 @@
     {
       "nr": "de:14627:5490",
       "name_location": "sacka radeburger straße",
-      "name": "radeburger straße",
+      "name": "sacka radeburger straße",
       "location": "sacka",
       "tarifzone1": 420,
       "tarifzone2": "",
@@ -37162,7 +37162,7 @@
     {
       "nr": "de:14625:6606",
       "name_location": "ottendorf okr. radeburger str",
-      "name": "radeburger straße",
+      "name": "ottendorf okrilla radeburger",
       "location": "ottendorf okrilla",
       "tarifzone1": 341,
       "tarifzone2": "",
@@ -37184,7 +37184,7 @@
     {
       "nr": "de:14625:6609",
       "name_location": "ottendorf okr. radeberger straße",
-      "name": "radeberger straße",
+      "name": "ottendorf okrilla radeberger",
       "location": "ottendorf okrilla",
       "tarifzone1": 341,
       "tarifzone2": "",
@@ -37195,7 +37195,7 @@
     {
       "nr": "de:14625:6610",
       "name_location": "ottendorf okrilla rathaus",
-      "name": "rathaus",
+      "name": "ottendorf okrilla rathaus",
       "location": "ottendorf okrilla",
       "tarifzone1": 340,
       "tarifzone2": "",

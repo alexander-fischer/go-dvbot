@@ -137,7 +137,7 @@ func FindStops(words []string, isLast bool) (string, string) {
 
 // Searches the stop of the list with help of Damerau-Levenshtein algorithm.
 func search(wordGroup string) (string, string) {
-	threshold := 0.93
+	threshold := 0.94
 
 	matchedNames := []Rank{}
 
@@ -221,6 +221,7 @@ func findBestRank(ranks []Rank) Rank {
 	for _, rank := range ranks {
 		rankDist := rank.RelDist
 		if rankDist > bestDist {
+			bestDist = rankDist
 			bestRank = rank
 		}
 	}
