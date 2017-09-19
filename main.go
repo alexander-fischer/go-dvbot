@@ -15,7 +15,7 @@ import (
 const (
 	accessToken      = "EAAFSK0G54cwBAGTI4fyZBJH3TayNjnBQg6BIfdZBsGtEZAZAqle57vtzzQUzVEmrZAeCqzjje5F6m2SEOVtz9IpSlCqCFGOMrhMLzHOK43m1XSdZCZBs5tqZBz6vfZAVhrqKQokxgRZCNOZCxpQ4RPbCO0faT95ADf7U5RZCZC88tgc5xrwZDZD"
 	verifyToken      = "dvb_bot_is_boss"
-	FacebookEndPoint = "https://graph.facebook.com/v2.6/me/messages"
+	facebookEndPoint = "https://graph.facebook.com/v2.6/me/messages"
 )
 
 // Main entry point.
@@ -113,7 +113,7 @@ func sendMessage(answer Answer) {
 
 		bodyBytes, _ := json.Marshal(reqBody)
 
-		req, err := http.NewRequest("POST", FacebookEndPoint, bytes.NewBuffer(bodyBytes))
+		req, err := http.NewRequest("POST", facebookEndPoint, bytes.NewBuffer(bodyBytes))
 		if err != nil {
 			log.Print(err)
 		}
