@@ -1,1 +1,5 @@
 .idea/
+projectFilesBackup/
+main_test.go
+keys/
+go-dvbot
