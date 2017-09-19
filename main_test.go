@@ -11,7 +11,7 @@ func TestCreateBotAnswer(t *testing.T)  {
 	testMessage := "Seidnitzcenter"
 	testAnswer, textInfo := createBotAnswer(testMessage, testId)
 
-	if testAnswer.category != -1 {
+	if testAnswer.category != 1 {
 		t.Error("TestCreateBotAnswer", "has false category")
 		t.Error("Answer:", testAnswer)
 		t.Error("TextInfo", textInfo)
