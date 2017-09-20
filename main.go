@@ -13,7 +13,6 @@ import (
 )
 
 const (
-	verifyToken      = "dvb_bot_is_boss"
 	facebookEndPoint = "https://graph.facebook.com/v2.6/me/messages"
 )
 
@@ -62,6 +61,8 @@ func webhookHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func verifyTokenAction(w http.ResponseWriter, r *http.Request) {
+	verifyToken := os.Getenv("VERIFYTOKEN")
+
 	if r.URL.Query().Get("hub.verify_token") == verifyToken {
 		log.Println("verify token success.")
 		fmt.Fprintf(w, r.URL.Query().Get("hub.challenge"))
