@@ -1,14 +1,14 @@
 package main
 
 import (
-	"github.com/kiliankoe/dvbgo"
-	"strconv"
-	"net/http"
-	"io/ioutil"
-	"github.com/tidwall/gjson"
-	"time"
 	"fmt"
+	"github.com/kiliankoe/dvbgo"
+	"github.com/tidwall/gjson"
+	"io/ioutil"
+	"net/http"
+	"strconv"
 	"strings"
+	"time"
 )
 
 // Process answer.
@@ -67,15 +67,30 @@ func processDepartures(info TextInfo) string {
 		if len(info.lines) > 0 {
 			for _, line := range info.lines {
 				if line == dep.Line {
-					answerText = answerText + "Die Linie " + dep.Line + " Richtung " +
-						dep.Direction + " in " + minutes + " Minuten.\n"
+					answerText = addAnswerText(answerText, dep.Line, dep.Direction, minutes)
 				}
 			}
 		} else {
-			answerText = answerText + "Die Linie " + dep.Line + " Richtung " + dep.Direction + " in " +
-				minutes + " Minuten.\n"
+			answerText = addAnswerText(answerText, dep.Line, dep.Direction, minutes)
 		}
 	}
+	return answerText
+}
+
+func addAnswerText(answerText string, line string, direction string, minutes string) string {
+	answerText = answerText + "Die Linie " + line + " Richtung " + direction
+	//" in " + minutes + " Minuten.\n"
+	minutesInt, err := strconv.ParseInt(minutes, 10, 64)
+
+	if err != nil {
+		return answerText
+	}
+
+	if minutesInt == 0 {
+		answerText = answerText + "jetzt.\n"
+	}
+
+
 	return answerText
 }
 
