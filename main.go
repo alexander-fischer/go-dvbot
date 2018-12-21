@@ -1,20 +1,18 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
-	"log"
-	"io/ioutil"
-	"os"
-	"encoding/json"
 	"bytes"
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"log"
+	"net/http"
 	"net/url"
+	"os"
 	"time"
 )
 
 const (
-	accessToken      = "EAAFSK0G54cwBAGTI4fyZBJH3TayNjnBQg6BIfdZBsGtEZAZAqle57vtzzQUzVEmrZAeCqzjje5F6m2SEOVtz9IpSlCqCFGOMrhMLzHOK43m1XSdZCZBs5tqZBz6vfZAVhrqKQokxgRZCNOZCxpQ4RPbCO0faT95ADf7U5RZCZC88tgc5xrwZDZD"
-	verifyToken      = "dvb_bot_is_boss"
 	facebookEndPoint = "https://graph.facebook.com/v2.6/me/messages"
 )
 
@@ -63,6 +61,8 @@ func webhookHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func verifyTokenAction(w http.ResponseWriter, r *http.Request) {
+	verifyToken := os.Getenv("VERIFYTOKEN")
+
 	if r.URL.Query().Get("hub.verify_token") == verifyToken {
 		log.Println("verify token success.")
 		fmt.Fprintf(w, r.URL.Query().Get("hub.challenge"))
@@ -100,6 +100,7 @@ func createBotAnswer(message string, senderId string) (Answer, TextInfo) {
 	return answer, textInfo
 }
 
+// Sends message to FB endpoint.
 func sendMessage(answer Answer) {
 	for _, answerText := range answer.text {
 		reqBody := Body{
@@ -118,6 +119,7 @@ func sendMessage(answer Answer) {
 			log.Print(err)
 		}
 
+		accessToken := os.Getenv("ACCESSTOKEN")
 		values := url.Values{}
 		values.Add("access_token", accessToken)
 
