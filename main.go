@@ -1,14 +1,14 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
-	"log"
-	"io/ioutil"
-	"os"
-	"encoding/json"
 	"bytes"
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"log"
+	"net/http"
 	"net/url"
+	"os"
 	"time"
 )
 
@@ -100,6 +100,7 @@ func createBotAnswer(message string, senderId string) (Answer, TextInfo) {
 	return answer, textInfo
 }
 
+// Sends message to FB endpoint.
 func sendMessage(answer Answer) {
 	for _, answerText := range answer.text {
 		reqBody := Body{
