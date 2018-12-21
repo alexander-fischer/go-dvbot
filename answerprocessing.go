@@ -87,9 +87,14 @@ func addAnswerText(answerText string, line string, direction string, minutes str
 	}
 
 	if minutesInt == 0 {
-		answerText = answerText + "jetzt.\n"
-	}
+		answerText = answerText + " jetzt.\n"
 
+	} else if minutesInt == 1 {
+		answerText = answerText + " in " + minutes + " Minute.\n"
+
+	} else {
+		answerText = answerText + " in " + minutes + " Minuten.\n"
+	}
 
 	return answerText
 }
